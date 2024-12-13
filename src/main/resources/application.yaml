@@ -1,4 +1,3 @@
-
 spring:
   application:
     name: ead-notification-service
@@ -11,5 +10,5 @@ spring:
       username: configserver
       password: 'ead123cs'
 
-
-
+  profiles:
+    active: dev
