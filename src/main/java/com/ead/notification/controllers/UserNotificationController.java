@@ -3,6 +3,7 @@ package com.ead.notification.controllers;
 import com.ead.notification.dtos.NotificationDto;
 import com.ead.notification.models.NotificationModel;
 import com.ead.notification.services.NotificationService;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -13,7 +14,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.Optional;
 import java.util.UUID;
 

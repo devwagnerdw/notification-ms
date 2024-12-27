@@ -1,8 +1,8 @@
 package com.ead.notification.dtos;
 
 import com.ead.notification.enums.NotificationStatus;
+import jakarta.validation.constraints.NotNull;
 
-import javax.validation.constraints.NotNull;
 
 public class NotificationDto {
 
