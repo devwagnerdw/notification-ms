@@ -3,6 +3,9 @@ package com.ead.notification.controllers;
 import com.ead.notification.dtos.NotificationDto;
 import com.ead.notification.models.NotificationModel;
 import com.ead.notification.services.NotificationService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -29,6 +32,11 @@ public class UserNotificationController {
 
     @PreAuthorize("hasAnyRole('STUDENT')")
     @GetMapping("/users/{userId}/notifications")
+    @Operation(summary = "Buscar Notificações do Usuário", description = "Recupera todas as notificações de um usuário específico.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Notificações encontradas com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Usuário não encontrado")
+    })
     public ResponseEntity<Page<NotificationModel>> getAllNotificationsByUser(@PathVariable(value="userId") UUID userId,
                                                                              @PageableDefault(page = 0, size = 10, sort = "notificationId", direction = Sort.Direction.ASC) Pageable pageable,
                                                                              Authentication Authentication){
@@ -37,6 +45,12 @@ public class UserNotificationController {
 
     @PreAuthorize("hasAnyRole('STUDENT')")
     @PutMapping("/users/{userId}/notifications/{notificationId}")
+    @Operation(summary = "Atualizar Notificação", description = "Atualiza o status de uma notificação de um usuário específico.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Notificação atualizada com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Notificação ou usuário não encontrados"),
+            @ApiResponse(responseCode = "400", description = "Dados inválidos")
+    })
     public ResponseEntity<Object> updateNotification(@PathVariable(value="userId") UUID userId,
                                                      @PathVariable(value="notificationId") UUID notificationId,
                                                      @RequestBody @Valid NotificationDto notificationDto){
